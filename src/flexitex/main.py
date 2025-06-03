@@ -4,6 +4,7 @@ import os
 from graphviz import Source
 
 from flexitex.core.config import Config
+from flexitex.core.graphics_move_manager import GraphicsMoveManager
 from flexitex.core.processor import LatexProcessor
 from flexitex.core.writer import OutputWriter
 from flexitex.flexiast.structure import Structure
@@ -23,6 +24,8 @@ def run_main(config_path: str, debug: bool, visualize: bool):
         graph = Source(dot_str, format="pdf")
         graph.view(cleanup=True)
 
+    graphics_mover = GraphicsMoveManager(os.path.dirname(config.input_file), config.output_folder, "figs")
+    ast = graphics_mover.detect_moves(ast)
 
     structure = Structure(
         output_path=config.output_folder,
@@ -35,10 +38,11 @@ def run_main(config_path: str, debug: bool, visualize: bool):
 
     writer = OutputWriter(config.output_folder)
     writer.write_all(files, clear_output=True)
+    graphics_mover.move_files()
 
 
 def main():
-    parser = argparse.ArgumentParser(description="FlexiTeX – LaTeX structure splitter and AST tool")
+    parser = argparse.ArgumentParser(description="FlexiTeX - LaTeX project style transformation tool")
     parser.add_argument(
         "-c", "--config", default="config.yml", help="Path to config YAML file"
     )

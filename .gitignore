@@ -31,3 +31,4 @@ config.yml
 # Log/debug files
 *.log
 *.tmp
+*.pdf
