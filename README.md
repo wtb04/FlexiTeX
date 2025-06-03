@@ -41,11 +41,8 @@ flexitex [-c CONFIG] [--debug] [-vo] [-vf]
 ## Configuration
 
 See [`example-config.yml`](example-config.yml) for a template.  
-Key sections:
 
--   `structure`: Rules for splitting and naming output files
--   `input`: Input folder and main file
--   `output`: Output folder, main file, and figure folder
+`TODO: explain how the config dsl file thing works`
 
 ## License
 
