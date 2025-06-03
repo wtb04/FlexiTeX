@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: >
+    If you use this software, please cite it using the metadata from this file.
+title: FlexiTex
+version: "1.0.0"
+date-released: 2025-06-03
+license: MIT
+repository-code: "https://github.com/wtb04/FlexiTeX"
+abstract: >
+    FlexiTeX is a tool for collaborative LaTeX projects that
+    enables each contributor to use their own flexible file
+    structure and naming conventions. It uses a configurable
+    mapping system to transform between project layouts,
+    making collaboration seamless without enforcing rigid
+    standards.
+authors:
+    - given-names: Wouter
+      family-names: ten Brinke
+      email: w.d.c.tenbrinke@student.utwente.nl
