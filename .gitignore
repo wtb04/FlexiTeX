@@ -1,0 +1,33 @@
+# macOS system files
+.DS_Store
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Package build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# IDE/editor config
+.vscode/
+.idea/
+
+# Configuration and local files
+config.yml
+.env
+.env.*
+
+# Log/debug files
+*.log
+*.tmp

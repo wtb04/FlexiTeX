@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flexitex"
+version = "0.0.1"
+description = "CLI tool for personal LaTeX file structures"
+authors = [{ name = "Wouter ten brinke", email = "w.d.c.tenbrinke@student.utwente.nl" }]
+requires-python = ">=3.8"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+  "graphviz",
+  "pylatexenc",
+  "PyYAML==6.0.2"
+]
+
+[project.urls]
+Homepage = "https://github.com/wtb04/FlexiTeX?"
+
+[project.scripts]
+flexitex = "flexitex.main:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

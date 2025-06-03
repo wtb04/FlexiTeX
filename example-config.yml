@@ -1,0 +1,18 @@
+structure:
+    - name: "section"
+      type: "macro"
+      condition: "<length> > 3"
+      file_name: "bigger/ch-[chapter] sec-[section].tex"
+    - name: "section"
+      type: "macro"
+      file_name: "regular/ch-[chapter] sec-[section].tex"
+    - name: "chapter"
+      type: "macro"
+      file_name: "chapters/[chapter].tex"
+
+input: "../input/main.tex"
+
+
+output:
+    folder: "../output"
+    main_file: "main.tex"
