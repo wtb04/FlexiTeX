@@ -9,14 +9,6 @@ FlexiTeX is a command-line tool for restructuring and splitting large LaTeX proj
 It enables users to define custom rules for organizing LaTeX documents, manages figures and file paths, and can visualize document structure.  
 The tool is intended for collaborative writing, sharing, or reorganizing complex LaTeX documents.
 
-## Table of Contents
-
--   [Installation](#installation)
--   [Usage](#usage)
--   [Configuration](#configuration)
--   [License](#license)
-
-
 ## Installation
 
 From the root directory run:
