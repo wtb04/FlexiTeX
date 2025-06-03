@@ -1,6 +1,6 @@
 <picture>
-  <source srcset="misc/FlexiTeX-dark.svg" media="(prefers-color-scheme: dark)">
-  <img src="misc/FlexiTeX-light.svg" alt="FlexiTeX Logo" height="100">
+  <source srcset="misc/FlexiTeX-dark.png" media="(prefers-color-scheme: dark)">
+  <img src="misc/FlexiTeX-light.png" alt="FlexiTeX Logo" height="100">
 </picture>
 
 FlexiTeX is a command-line tool for restructuring and splitting large LaTeX projects.  
