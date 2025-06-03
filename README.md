@@ -1,5 +1,3 @@
-# FlexiTeX
-
 <picture>
   <source srcset="misc/FlexiTeX-dark.svg" media="(prefers-color-scheme: dark)">
   <img src="misc/FlexiTeX-light.svg" alt="FlexiTeX Logo" height="100">
