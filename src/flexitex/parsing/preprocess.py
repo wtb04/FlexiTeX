@@ -18,7 +18,10 @@ class PreProcess:
         return expanded
 
     @staticmethod
-    def expand_inputs(source: str, root_dir: str) -> str:
+    def expand_inputs(source: str, root_dir: str, visited_files=None) -> str:
+        if visited_files is None:
+            visited_files = set()
+
         nodes = LatexParser.get_nodes_from_string(source)
         replacements = []
 
@@ -40,13 +43,18 @@ class PreProcess:
 
                 if not os.path.isfile(full_path):
                     raise ValueError(f"File not found: {filename}")
-                else:
-                    with open(full_path, 'r', encoding='utf-8') as f:
-                        content = f.read()
-                    replacement = PreProcess.expand_inputs(content, root_dir)
+                
+                if full_path in visited_files:
+                    raise RecursionError(f"Cyclic input detected: {full_path}")
+                visited_files.add(full_path)
 
-                replacements.append(
-                    (node.pos, node.pos + node.len, replacement))
+                with open(full_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                replacement = PreProcess.expand_inputs(content, root_dir, visited_files)
+
+                visited_files.remove(full_path)
+
+                replacements.append((node.pos, node.pos + node.len, replacement))
 
             for field in node._fields:
                 child = getattr(node, field)
