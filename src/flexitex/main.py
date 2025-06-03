@@ -15,7 +15,7 @@ from flexitex.generators.dot_generator import DotGenerator
 def run_main(config_path: str, debug: bool, visualize: bool):
     config = Config(path=config_path)
 
-    processor = LatexProcessor(config.input_file, debug=debug)
+    processor = LatexProcessor(config.input_folder, config.input_main_file, debug=debug)
     ast = processor.parse()
 
     if visualize:
@@ -24,7 +24,7 @@ def run_main(config_path: str, debug: bool, visualize: bool):
         graph = Source(dot_str, format="pdf")
         graph.view(cleanup=True)
 
-    graphics_mover = GraphicsMoveManager(os.path.dirname(config.input_file), config.output_folder, "figs")
+    graphics_mover = GraphicsMoveManager(config.input_folder, config.output_folder, config.output_figure_folder)
     ast = graphics_mover.detect_moves(ast)
 
     structure = Structure(

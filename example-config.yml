@@ -10,9 +10,11 @@ structure:
       type: "macro"
       file_name: "chapters/[chapter].tex"
 
-input: "../input/main.tex"
-
+input:
+    folder: "../input"
+    main_file: "main.tex"
 
 output:
     folder: "../output"
     main_file: "main.tex"
+    figure_folder: "figs"

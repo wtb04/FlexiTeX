@@ -8,7 +8,8 @@ from flexitex.parsing.parser import LatexParser
 @dataclass
 class PreProcess:
     @staticmethod
-    def pre_process(filepath: str) -> str:
+    def pre_process(input_folder: str, input_main_file: str) -> str:
+        filepath = os.path.join(input_folder, input_main_file)
         with open(filepath, 'r', encoding='utf-8') as f:
             source = f.read()
 
@@ -38,7 +39,7 @@ class PreProcess:
                 full_path = os.path.abspath(os.path.join(root_dir, filename))
 
                 if not os.path.isfile(full_path):
-                    replacement = f"% File not found: {filename}"
+                    raise ValueError(f"File not found: {filename}")
                 else:
                     with open(full_path, 'r', encoding='utf-8') as f:
                         content = f.read()
