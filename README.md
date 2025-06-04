@@ -1,6 +1,6 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wtb04/FlexiTeX/refs/heads/main/misc/FlexiTeX-light.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wtb04/FlexiTeX/refs/heads/main/misc/FlexiTeX-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wtb04/FlexiTeX/refs/heads/main/misc/FlexiTeX-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wtb04/FlexiTeX/refs/heads/main/misc/FlexiTeX-dark.svg">
   <img alt="FlexiTeX Logo" height="100">
 </picture>
 
