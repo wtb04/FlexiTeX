@@ -1,6 +1,6 @@
 <picture>
-  <source srcset="misc/FlexiTeX-dark.png" media="(prefers-color-scheme: dark)">
-  <img src="misc/FlexiTeX-light.png" alt="FlexiTeX Logo" height="100">
+  <img src="misc/FlexiTeX-light.png#gh-light-mode-only" alt="FlexiTeX Logo" height="100">
+  <img src="misc/FlexiTeX-dark.png#gh-dark-mode-only" alt="FlexiTeX Logo" height="100">
 </picture>
 
 FlexiTeX is a command-line tool for restructuring and splitting large LaTeX projects.  
@@ -29,18 +29,23 @@ pip install .
 flexitex [-c CONFIG] [--debug] [-vo] [-vf]
 ```
 
-| Option                    | Required | Argument         | Description                                 |
-|---------------------------|----------|------------------|---------------------------------------------|
-| `-c`, `--config`          | No       | Path to YAML     | Path to config file (default: `config.yml`) |
-| `--debug`                 | No       | None             | Enable debug output during parsing          |
-| `-vo`, `--visualize-original` | No   | None             | Show initial AST as Graphviz PDF            |
-| `-vf`, `--visualize-final`    | No   | None             | Show final AST as Graphviz PDF              |
+| Option                        | Required | Argument     | Description                                 |
+| ----------------------------- | -------- | ------------ | ------------------------------------------- |
+| `-c`, `--config`              | No       | Path to YAML | Path to config file (default: `config.yml`) |
+| `--debug`                     | No       | None         | Enable debug output during parsing          |
+| `-vo`, `--visualize-original` | No       | None         | Show initial AST as Graphviz PDF            |
+| `-vf`, `--visualize-final`    | No       | None         | Show final AST as Graphviz PDF              |
 
 ## Configuration
 
-See [`example-config.yml`](example-config.yml) for a template.  
+See [`example-config.yml`](example-config.yml) for a template.
 
-`TODO: explain how the config dsl file thing works`
+`TODO: explain how the config DSL file works`
+
+## Example Repository
+
+For a working demonstration of collaborative workflows using FlexiTeX, see the [FlexiTeX-Example repository](https://github.com/wtb04/FlexiTeX-Example).  
+It shows how multiple users can maintain custom LaTeX styles across branches with automated synchronization via GitHub Actions.
 
 ## License
 
