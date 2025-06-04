@@ -38,7 +38,7 @@ def run_main(config_path: str, debug: bool, visualize_original: bool, visualize_
     generator = LatexGenerator(structure)
     files = generator.to_latex(ast)
 
-    writer = OutputWriter(config.output_folder)
+    writer = OutputWriter(config.output_folder, debug=debug)
     writer.write_all(files, clear_output=True)
     graphics_mover.move_files()
 
