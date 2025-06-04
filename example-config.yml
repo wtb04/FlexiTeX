@@ -1,14 +1,19 @@
 structure:
     - name: "section"
       type: "macro"
-      condition: "<length> > 3"
-      file_name: "bigger/ch-[chapter] sec-[section].tex"
+      condition: "<length> > 5"
+      ## chapters/ch1-introduction/sec1/broad_intro.tex
+      file_name: "chapters/ch[chapter]-[name:chapter]/sec[section]/[name:section].tex"
+
     - name: "section"
       type: "macro"
-      file_name: "regular/ch-[chapter] sec-[section].tex"
+      ## chapters/ch1-introduction/sec1.tex
+      file_name: "chapters/ch[chapter]-[name:chapter]/sec[section].tex"
+
     - name: "chapter"
       type: "macro"
-      file_name: "chapters/[chapter].tex"
+      ## chapters/ch1-introduction.tex
+      file_name: "chapters/ch[chapter]-[name:chapter].tex"
 
 input:
     folder: "../input"

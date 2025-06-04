@@ -6,6 +6,7 @@ import re
 import ast
 import operator
 
+from flexitex.flexiast.builder import STRUCTURAL_MACROS
 from flexitex.flexiast.node import ASTNode
 from flexitex.flexiast.evaluator import Evaluator
 
@@ -46,8 +47,32 @@ class Structure:
 
     @staticmethod
     def substitute_placeholders(text: str, node: "ASTNode"):
+        def normalize_name(name: str):
+            name = name.lower()
+            # Replace all characters except a-z, 0-9, hyphen and underscore with underscore
+            name = re.sub(r'[^a-z0-9\-_]+', '_', name)
+            # Collapse multiple underscores into one
+            name = re.sub(r'_+', '_', name)
+            # Strip leading/trailing underscores
+            name = name.strip('_')
+            return name
+
         def replace_brackets(match):
             key = match.group(1)
+            # Replace with structural macros name
+            if key.startswith("name:"):
+                macro_name = key[5:]
+
+                if macro_name not in STRUCTURAL_MACROS:
+                    raise ValueError(
+                        f"[name:{macro_name}] is not a valid structural macro")
+
+                target_node = node.find_closest('macro', macro_name)
+                if target_node is None:
+                    return f"[name:{macro_name}]"
+
+                return normalize_name(target_node.arg(0))
+
             idx = node.index(key)
             return str(idx) if idx != -1 else f"[{key}]"
 
@@ -56,7 +81,7 @@ class Structure:
             val = getattr(node, attr, None)
             return str(val) if val is not None else f"<{attr}>"
 
-        text = re.sub(r"\[(\w+)\]", replace_brackets, text)
+        text = re.sub(r"\[([\w:-]+)\]", replace_brackets, text)
         text = re.sub(r"<(\w+)>", replace_angles, text)
 
         return text

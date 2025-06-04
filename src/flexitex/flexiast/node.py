@@ -37,6 +37,11 @@ class ASTNode:
     @property
     def _splitted(self): return bool(self._file_name)
 
+    def arg(self, n: int) -> str:
+        if n < len(self.args):
+            return self.args[n].value
+        return ""
+
     def has_next_sibling_of_type(self, t: Literal["macro", "environment", "root", "text", "comment"]) -> bool:
         if self.parent is None:
             return False
@@ -48,6 +53,14 @@ class ASTNode:
         if idx + 1 < len(siblings):
             return siblings[idx + 1].type == t
         return False
+
+    def find_closest(self, type: Literal["macro", "environment", "text", "comment"], name: str):
+        current = self
+        while current is not None and not current.is_root:
+            if current.name == name and current.type == type:
+                return current
+            current = current.parent
+        return None
 
     def index(self, parent_name=None) -> int:
         if self.is_root:
