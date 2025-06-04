@@ -54,6 +54,10 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
                 args=parse_arguments(node.nodeargd)
             )
             stack[-1].add_child(env_node)
+            
+            # Special handling for verbatim
+            if hasattr(node.nodeargd, 'verbatim_text') and node.nodeargd.verbatim_text:
+                env_node.add_child(ASTNode("text", "text", text=node.nodeargd.verbatim_text.strip()))
 
             # Recurse into environment content
             children_ast = to_ast(node.nodelist, latex_source)
