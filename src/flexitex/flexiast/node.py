@@ -15,6 +15,7 @@ class ASTNode:
     type: Literal["macro", "environment", "root", "text", "comment"]
     name: str
     args: List[Arg] = field(default_factory=list)
+    macro_post_space: str = ""
     text: str = ""
     children: List[ASTNode] = field(default_factory=list)
     parent: Optional[ASTNode] = None
