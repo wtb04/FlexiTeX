@@ -1,3 +1,4 @@
+import re
 from pylatexenc.latexwalker import (
     LatexCharsNode, LatexMacroNode, LatexEnvironmentNode, LatexGroupNode, LatexCommentNode
 )
@@ -54,10 +55,11 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
                 args=parse_arguments(node.nodeargd)
             )
             stack[-1].add_child(env_node)
-            
+
             # Special handling for verbatim
             if hasattr(node.nodeargd, 'verbatim_text') and node.nodeargd.verbatim_text:
-                env_node.add_child(ASTNode("text", "text", text=node.nodeargd.verbatim_text.strip()))
+                env_node.add_child(
+                    ASTNode("text", "text", text=node.nodeargd.verbatim_text.strip()))
 
             # Recurse into environment content
             children_ast = to_ast(node.nodelist, latex_source)
@@ -90,7 +92,7 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
                 stack[-1].add_child(macro_node)
 
         elif isinstance(node, LatexCharsNode):
-            text_content = node.chars.strip()
+            text_content = re.sub(r'\n{3,}', '\n\n', node.chars)
             if text_content:
                 text_node = ASTNode("text", "text", text=text_content)
                 stack[-1].add_child(text_node)
@@ -103,7 +105,7 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
                 for n in node.nodelist
             ).strip()
             if group_text:
-                text_node = ASTNode("text", "text", text=group_text)
+                text_node = ASTNode("text", "text", text=f"{{{group_text}}}")
                 stack[-1].add_child(text_node)
 
         elif isinstance(node, LatexCommentNode):

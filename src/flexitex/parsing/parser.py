@@ -16,7 +16,12 @@ class LatexParser:
         ctx.add_context_category(
             None,
             prepend=True,
-            macros=[MacroSpec('caption', args_parser='{')],
+            macros=[MacroSpec('caption', args_parser='{'), MacroSpec('AtBeginDocument', args_parser='{'), MacroSpec('setcopyright', args_parser='{'), MacroSpec('copyrightyear', args_parser='{'), MacroSpec('acmYear', args_parser='{'), 
+                    MacroSpec('acmPrice', args_parser='{'), MacroSpec('acmISBN', args_parser='{'), MacroSpec('acmDOI', args_parser='{'), MacroSpec('acmConference', args_parser='[{{{'), MacroSpec('crefname', args_parser='{{{'), 
+                    MacroSpec('Crefname', args_parser='{{{'), MacroSpec('newcounter', args_parser='{'), MacroSpec('refstepcounter', args_parser='{'), MacroSpec('author', args_parser='{'), MacroSpec('affiliation', args_parser='{'), 
+                    MacroSpec('institution', args_parser='{'), MacroSpec('streetaddress', args_parser='{'), MacroSpec('city', args_parser='{'), MacroSpec('postcode', args_parser='{'), MacroSpec('country', args_parser='{'), 
+                    MacroSpec('country', args_parser='{'), MacroSpec('email', args_parser='{'), MacroSpec('bibliographystyle', args_parser='{'), MacroSpec('rqlabel', args_parser='{'), MacroSpec('cref', args_parser='{'),
+                    MacroSpec('Cref', args_parser='{')],
             environments=[EnvironmentSpec('minipage', args_parser='{')]
         )
 
