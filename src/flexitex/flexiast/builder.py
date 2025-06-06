@@ -70,7 +70,8 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
             macro_name = node.macroname
             macro_node = ASTNode(
                 "macro", macro_name,
-                args=parse_arguments(node.nodeargd)
+                args=parse_arguments(node.nodeargd),
+                macro_post_space=node.macro_post_space
             )
 
             if is_structural_macro(macro_name):
