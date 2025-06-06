@@ -4,7 +4,7 @@ import os
 from graphviz import Source
 
 from flexitex.core.config import Config
-from flexitex.core.graphics_move_manager import GraphicsMoveManager
+from flexitex.core.move_manager import MoveManager
 from flexitex.core.processor import LatexProcessor
 from flexitex.core.writer import OutputWriter
 from flexitex.flexiast.structure import Structure
@@ -25,9 +25,9 @@ def run_main(config_path: str, debug: bool, visualize_original: bool, visualize_
         graph = Source(dot_str, format="pdf")
         graph.view("original", cleanup=True)
 
-    graphics_mover = GraphicsMoveManager(
+    move_manager = MoveManager(
         config.input_folder, config.output_folder, config.output_figure_folder)
-    ast = graphics_mover.detect_moves(ast)
+    ast = move_manager.detect_moves(ast)
 
     structure = Structure(
         output_path=config.output_folder,
@@ -40,7 +40,7 @@ def run_main(config_path: str, debug: bool, visualize_original: bool, visualize_
 
     writer = OutputWriter(config.output_folder, debug=debug)
     writer.write_all(files, clear_output=True)
-    graphics_mover.move_files()
+    move_manager.move_files()
 
     if visualize_final:
         dot = DotGenerator()

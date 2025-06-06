@@ -52,7 +52,7 @@ class LatexGenerator:
         if node.args:
             for arg in node.args:
                 result += arg.type[0] + arg.value + arg.type[1]
-        elif node.has_next_sibling_of_type('text'):
+        else:
             result += " "
 
         for child in node.children:
