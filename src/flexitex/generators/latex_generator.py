@@ -52,11 +52,8 @@ class LatexGenerator:
         if node.args:
             for arg in node.args:
                 result += arg.type[0] + arg.value + arg.type[1]
-            result += "\n"
         elif node.has_next_sibling_of_type('text'):
             result += " "
-        else:
-            result += "\n"
 
         for child in node.children:
             result += self._generate_latex(child)
@@ -69,17 +66,16 @@ class LatexGenerator:
         if node.args:
             for arg in node.args:
                 result += arg.type[0] + arg.value + arg.type[1]
-        result += "\n"
 
         for child in node.children:
             result += self._generate_latex(child)
 
-        result += f"\\end{{{node.name}}}\n"
+        result += f"\\end{{{node.name}}}"
 
         return result
 
     def _get_latex_string_text(self, node: "ASTNode") -> str:
-        return node.text + "\n"
+        return node.text
 
     def _get_latex_string_comment(self, node: "ASTNode") -> str:
-        return "%" + node.text + "\n"
+        return "%" + node.text

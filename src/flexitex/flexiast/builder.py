@@ -1,3 +1,4 @@
+import re
 from pylatexenc.latexwalker import (
     LatexCharsNode, LatexMacroNode, LatexEnvironmentNode, LatexGroupNode, LatexCommentNode
 )
@@ -90,7 +91,7 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
                 stack[-1].add_child(macro_node)
 
         elif isinstance(node, LatexCharsNode):
-            text_content = node.chars.strip()
+            text_content = re.sub(r'\n{3,}', '\n\n', node.chars)
             if text_content:
                 text_node = ASTNode("text", "text", text=text_content)
                 stack[-1].add_child(text_node)
