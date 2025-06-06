@@ -53,7 +53,7 @@ class LatexGenerator:
             for arg in node.args:
                 result += arg.type[0] + arg.value + arg.type[1]
         else:
-            result += " " + node.macro_post_space
+            result += node.macro_post_space
 
         for child in node.children:
             result += self._generate_latex(child)
