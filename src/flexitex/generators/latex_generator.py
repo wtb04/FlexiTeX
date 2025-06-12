@@ -78,4 +78,4 @@ class LatexGenerator:
         return node.text
 
     def _get_latex_string_comment(self, node: "ASTNode") -> str:
-        return "%" + node.text
+        return "%" + node.text + "\n"
