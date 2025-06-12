@@ -2,6 +2,7 @@ import re
 from pylatexenc.latexwalker import (
     LatexCharsNode, LatexMacroNode, LatexEnvironmentNode, LatexGroupNode, LatexCommentNode
 )
+from pylatexenc.macrospec import ParsedVerbatimArgs
 from flexitex.flexiast.node import ASTNode, Arg
 from typing import List
 
@@ -27,6 +28,12 @@ def structural_level(name: str) -> int:
 
 def parse_arguments(parsed_args) -> List[Arg]:
     args = []
+
+    if isinstance(parsed_args, ParsedVerbatimArgs):
+        delimiter = ''.join(parsed_args.verbatim_delimiters)
+        args.append(Arg(type=delimiter, value=parsed_args.verbatim_text))
+    
+
     for arg in parsed_args.argnlist:
         if arg is None:
             continue
