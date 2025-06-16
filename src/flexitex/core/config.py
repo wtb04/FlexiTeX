@@ -6,7 +6,7 @@ from flexitex.flexiast.structure import NodeRule
 class Config:
     def __init__(self, path="config.yml"):
         with open(path, encoding='utf-8') as f:
-            config = yaml.safe_load(f)
+            config = yaml.safe_load(f) or {}
 
         input = config.get("input", {})
         self.input_folder = input.get("folder", "")
