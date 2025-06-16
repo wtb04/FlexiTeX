@@ -30,9 +30,9 @@ def parse_arguments(parsed_args) -> List[Arg]:
     args = []
 
     if isinstance(parsed_args, ParsedVerbatimArgs):
-        delimiter = ''.join(parsed_args.verbatim_delimiters)
-        args.append(Arg(type=delimiter, value=parsed_args.verbatim_text))
-    
+        if parsed_args.verbatim_delimiters:
+            delimiter = ''.join(parsed_args.verbatim_delimiters)
+            args.append(Arg(type=delimiter, value=parsed_args.verbatim_text))
 
     for arg in parsed_args.argnlist:
         if arg is None:
@@ -66,7 +66,7 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
             # Special handling for verbatim
             if hasattr(node.nodeargd, 'verbatim_text') and node.nodeargd.verbatim_text:
                 env_node.add_child(
-                    ASTNode("text", "text", text=node.nodeargd.verbatim_text.strip()))
+                    ASTNode("text", "text", text=node.nodeargd.verbatim_text))
 
             # Recurse into environment content
             children_ast = to_ast(node.nodelist, latex_source)

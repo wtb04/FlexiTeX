@@ -28,14 +28,22 @@ pip install .
 
 ```sh
 flexitex [-c CONFIG] [--debug] [-vo] [-vf]
+         [-if INPUT_FOLDER] [-im INPUT_MAIN]
+         [-of OUTPUT_FOLDER] [-om OUTPUT_MAIN]
+         [-fig FIGURE_FOLDER]
 ```
 
-| Option                        | Required | Argument     | Description                                 |
-| ----------------------------- | -------- | ------------ | ------------------------------------------- |
-| `-c`, `--config`              | No       | Path to YAML | Path to config file (default: `config.yml`) |
-| `--debug`                     | No       | None         | Enable debug output during parsing          |
-| `-vo`, `--visualize-original` | No       | None         | Show initial AST as Graphviz PDF            |
-| `-vf`, `--visualize-final`    | No       | None         | Show final AST as Graphviz PDF              |
+| Option                        | Required | Argument     | Description                                                        |
+| ----------------------------- | -------- | ------------ | ------------------------------------------------------------------ |
+| `-c`, `--config`              | No       | Path to YAML | Path to config file (default: `config.yml`)                        |
+| `--debug`, `-d`               | No       | None         | Enable debug output during parsing                                 |
+| `-vo`, `--visualize-original` | No       | None         | Show initial AST as Graphviz PDF (before applying splitting rules) |
+| `-vf`, `--visualize-final`    | No       | None         | Show final AST as Graphviz PDF (after applying splitting rules)    |
+| `-if`, `--input-folder`       | No       | Path         | Override: input folder (e.g., `./input`)                           |
+| `-im`, `--input-main`         | No       | Filename     | Override: input main file (e.g., `main.tex`)                       |
+| `-of`, `--output-folder`      | No       | Path         | Override: output folder (e.g., `./output`)                         |
+| `-om`, `--output-main`        | No       | Filename     | Override: output main file (e.g., `output.tex`)                    |
+| `-fig`, `--figure-folder`     | No       | Path         | Override: folder for figures (e.g., `figs/`)                       |
 
 ## Configuration
 

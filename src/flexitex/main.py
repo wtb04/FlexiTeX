@@ -12,9 +12,7 @@ from flexitex.generators.latex_generator import LatexGenerator
 from flexitex.generators.dot_generator import DotGenerator
 
 
-def run_main(config_path: str, debug: bool, visualize_original: bool, visualize_final: bool):
-    config = Config(path=config_path)
-
+def run_main(config: Config, debug: bool, visualize_original: bool, visualize_final: bool):
     processor = LatexProcessor(
         config.input_folder, config.input_main_file, debug=debug)
     ast = processor.parse()
@@ -52,22 +50,54 @@ def run_main(config_path: str, debug: bool, visualize_original: bool, visualize_
 def main():
     parser = argparse.ArgumentParser(
         description="FlexiTeX - LaTeX project style transformation tool")
+
+    # Configuration file
     parser.add_argument(
-        "-c", "--config", default="config.yml", help="Path to config YAML file"
+        "-c", "--config", default="config.yml", help="Path to YAML configuration file"
+    )
+
+    # Overrides for config fields
+    parser.add_argument(
+        "-if", "--input-folder", help="Override: input folder (relative or absolute)"
     )
     parser.add_argument(
-        "--debug", action="store_true", help="Enable debug output during parsing"
+        "-im", "--input-main", help="Override: input main file (e.g., main.tex)"
     )
     parser.add_argument(
-        "-vo", "--visualize-original", action="store_true", help="Display Graphviz pdf of initial AST"
+        "-of", "--output-folder", help="Override: output folder (relative or absolute)"
     )
     parser.add_argument(
-        "-vf", "--visualize-final", action="store_true", help="Display Graphviz pdf of final AST"
+        "-om", "--output-main", help="Override: output main file (e.g., main.tex)"
+    )
+    parser.add_argument(
+        "-fig", "--figure-folder", help="Override: folder where figures should be written"
+    )
+
+    # Debugging and visualization
+    parser.add_argument(
+        "-d", "--debug", action="store_true", help="Enable debug output during parsing"
+    )
+    parser.add_argument(
+        "-vo", "--visualize-original", action="store_true", help="Display Graphviz PDF of the initial AST"
+    )
+    parser.add_argument(
+        "-vf", "--visualize-final", action="store_true", help="Display Graphviz PDF of the final AST"
     )
 
     args = parser.parse_args()
-    run_main(args.config, args.debug,
-             args.visualize_original, args.visualize_final)
+
+    config = Config(path=args.config)
+    config.override(
+        input_folder=args.input_folder,
+        input_main=args.input_main,
+        output_folder=args.output_folder,
+        output_main=args.output_main,
+        figure_folder=args.figure_folder,
+    )
+
+    run_main(config=config, debug=args.debug,
+             visualize_original=args.visualize_original,
+             visualize_final=args.visualize_final)
 
 
 if __name__ == "__main__":
