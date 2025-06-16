@@ -13,6 +13,8 @@ from flexitex.generators.dot_generator import DotGenerator
 
 
 def run_main(config: Config, debug: bool, visualize_original: bool, visualize_final: bool):
+    config.validate()
+
     processor = LatexProcessor(
         config.input_folder, config.input_main_file, debug=debug)
     ast = processor.parse()

@@ -1,3 +1,4 @@
+import os
 import yaml
 from flexitex.flexiast.structure import NodeRule
 
@@ -31,3 +32,36 @@ class Config:
             self.output_main_file = output_main
         if figure_folder:
             self.output_figure_folder = figure_folder
+
+    def validate(self):
+        errors = []
+
+        if not self.input_folder:
+            errors.append("Missing input folder.")
+        if not self.input_main_file:
+            errors.append("Missing input main file.")
+        if not self.output_folder:
+            errors.append("Missing output folder.")
+        if not self.output_main_file:
+            errors.append("Missing output main file.")
+        if not self.output_figure_folder:
+            errors.append("Missing output figure folder.")
+
+        if not isinstance(self.structure_rules, list):
+            errors.append("structure_rules must be a list.")
+        elif not all(isinstance(rule, NodeRule) for rule in self.structure_rules):
+            errors.append("All structure_rules must be instances of NodeRule.")
+
+        if self.input_folder:
+            if not os.path.isdir(self.input_folder):
+                errors.append(
+                    f"Input folder does not exist: {self.input_folder}")
+            elif self.input_main_file:
+                input_main_path = os.path.join(
+                    self.input_folder, self.input_main_file)
+                if not os.path.isfile(input_main_path):
+                    errors.append(
+                        f"Input main file does not exist: {input_main_path}")
+
+        if errors:
+            raise ValueError("Invalid configuration:\n" + "\n".join(errors))
