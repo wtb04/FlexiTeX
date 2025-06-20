@@ -1,6 +1,6 @@
 import re
 from pylatexenc.latexwalker import (
-    LatexCharsNode, LatexMacroNode, LatexEnvironmentNode, LatexGroupNode, LatexCommentNode
+    LatexCharsNode, LatexMacroNode, LatexEnvironmentNode, LatexGroupNode, LatexCommentNode, LatexMathNode
 )
 from pylatexenc.macrospec import ParsedVerbatimArgs
 from flexitex.flexiast.node import ASTNode, Arg
@@ -34,6 +34,9 @@ def parse_arguments(parsed_args) -> List[Arg]:
             delimiter = ''.join(parsed_args.verbatim_delimiters)
             args.append(Arg(type=delimiter, value=parsed_args.verbatim_text))
 
+    if parsed_args is None:
+        return args
+
     for arg in parsed_args.argnlist:
         if arg is None:
             continue
@@ -43,7 +46,7 @@ def parse_arguments(parsed_args) -> List[Arg]:
                 n.latex_verbatim() if isinstance(n, LatexMacroNode) else
                 ''
                 for n in arg.nodelist
-            ).strip()
+            )
             delimiter = ''.join(arg.delimiters)
             args.append(Arg(type=delimiter, value=value))
         elif isinstance(arg, LatexMacroNode):
@@ -111,9 +114,20 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
                 n.chars if isinstance(n, LatexCharsNode) else
                 n.latex_verbatim() if isinstance(n, LatexMacroNode) else ''
                 for n in node.nodelist
-            ).strip()
+            )
             if group_text:
                 text_node = ASTNode("text", "text", text=f"{{{group_text}}}")
+                stack[-1].add_child(text_node)
+
+        elif isinstance(node, LatexMathNode):
+            math_text = ''.join(
+                n.chars if isinstance(n, LatexCharsNode) else
+                n.latex_verbatim() if isinstance(n, LatexMacroNode) else ''
+                for n in node.nodelist
+            )
+            if math_text:
+                text_node = ASTNode(
+                    "text", "text", text=f"{node.delimiters[0]}{math_text}{node.delimiters[1]}")
                 stack[-1].add_child(text_node)
 
         elif isinstance(node, LatexCommentNode):

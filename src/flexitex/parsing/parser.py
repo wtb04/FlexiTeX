@@ -1,5 +1,5 @@
 from pylatexenc.latexwalker import LatexWalker
-from pylatexenc.macrospec import MacroSpec , EnvironmentSpec, VerbatimArgsParser
+from pylatexenc.macrospec import MacroSpec, EnvironmentSpec, VerbatimArgsParser
 import pylatexenc
 
 
@@ -23,10 +23,10 @@ class LatexParser:
                         'refstepcounter', args_parser='{'), MacroSpec('author', args_parser='{'), MacroSpec('affiliation', args_parser='{'),
                     MacroSpec('institution', args_parser='{'), MacroSpec('streetaddress', args_parser='{'), MacroSpec(
                         'city', args_parser='{'), MacroSpec('postcode', args_parser='{'), MacroSpec('country', args_parser='{'),
-                    MacroSpec('country', args_parser='{'), MacroSpec('email', args_parser='{'), MacroSpec(
-                        'bibliographystyle', args_parser='{'), MacroSpec('rqlabel', args_parser='{'), MacroSpec('cref', args_parser='{'),
+                    MacroSpec('country', args_parser='{'), MacroSpec('newcolumntype', args_parser='{[{'), MacroSpec('email', args_parser='{'), MacroSpec(
+                        'bibliographystyle', args_parser='{'), MacroSpec('rqlabel', args_parser='{'), MacroSpec('cref', args_parser='{'), MacroSpec('subfigure', args_parser='{'),
                     MacroSpec('Cref', args_parser='{'), MacroSpec(macroname='verb', args_parser=VerbatimArgsParser('verb-macro'))],
-            environments=[EnvironmentSpec('minipage', args_parser='{')]
+            environments=[EnvironmentSpec('minipage', args_parser='{'), EnvironmentSpec('minted', args_parser='{')]
         )
 
         LatexParser._context = ctx
