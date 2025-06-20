@@ -10,9 +10,7 @@ class LatexGenerator:
 
     def to_latex(self, node: "ASTNode") -> list[tuple[str, str]]:
         if not node.is_root:
-            print(node.type)
             raise ValueError("Expected root node")
-
         result = "".join(self._generate_latex(child)
                          for child in node.children)
         main_path = os.path.join(
@@ -24,6 +22,8 @@ class LatexGenerator:
         node._file_name = self.rules.check_split(node)
         if node._splitted:
             content = self._get_latex_string(node)
+            if content.endswith('\n'):
+                content = content[:-1]
             filepath = os.path.join(self.rules.output_path, node._file_name)
             self.generated_files.append((filepath, content))
 

@@ -103,7 +103,7 @@ def to_ast(node_list, latex_source: str) -> ASTNode:
                 stack[-1].add_child(macro_node)
 
         elif isinstance(node, LatexCharsNode):
-            text_content = re.sub(r'\n{3,}', '\n\n', node.chars)
+            text_content = ''.join(node.chars)
             if text_content:
                 text_node = ASTNode("text", "text", text=text_content)
                 stack[-1].add_child(text_node)
