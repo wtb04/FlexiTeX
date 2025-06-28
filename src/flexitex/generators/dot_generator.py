@@ -1,4 +1,5 @@
 from flexitex.flexiast.node import ASTNode
+import flexitex.flexiast.builder as b
 
 
 class DotGenerator:
@@ -21,21 +22,31 @@ class DotGenerator:
             current_id = counter[0]
 
             if node.is_macro:
-                color = "lightblue"
+                if b.is_structural_macro(node.name):
+                    fillcolor = "#DAE8FC"
+                    border_color = "#6F90BF"
+                else:
+                    fillcolor = "#F8CECC"
+                    border_color = "#B85450"
             elif node.is_env:
-                color = "lightgreen"
+                fillcolor = "#D5E8D4"
+                border_color = "#82B366"
             elif node.is_text:
-                color = "lightgray"
+                fillcolor = "#FFE6CC"
+                border_color = "#D79B00"
             elif node.is_root:
-                color = "orange"
+                fillcolor = "#FFE6CC"
+                border_color = "#D79B00"
             elif node.is_comment:
-                color = "lightyellow"
+                fillcolor = "#FFF2CC"
+                border_color = "#D6B656"
             else:
-                color = "white"
+                fillcolor = "white"
+                border_color = "black"
 
-            label = f"{node.index()}. {node.name}"
+            label = f"{node.name}"
             lines.append(
-                f'  {current_id} [label="{escape(label)}", style=filled, fillcolor="{color}"];')
+                f'  {current_id} [label="{escape(label)}", style=filled, fillcolor="{fillcolor}", color="{border_color}"];')
 
             # 1. Add arguments node
             if node.args:
