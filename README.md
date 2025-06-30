@@ -49,8 +49,6 @@ flexitex [-c CONFIG] [--debug] [-vo] [-vf]
 
 See [`example-config.yml`](example-config.yml) for a template.
 
-`TODO: explain how the config DSL file works`
-
 ## Example Repository
 
 For a working demonstration of collaborative workflows using FlexiTeX, see the [FlexiTeX-Example repository](https://github.com/wtb04/FlexiTeX-Example).  
