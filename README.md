@@ -57,3 +57,5 @@ It shows how multiple users can maintain custom LaTeX styles across branches wit
 ## License
 
 MIT License. See [LICENSE](LICENSE).
+
+Made by [Wouter ten Brinke](https://woutertenbrinke.nl), with a [write-up of the project](https://woutertenbrinke.nl/projects/flexitex) on my site.
